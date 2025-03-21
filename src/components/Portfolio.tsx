@@ -61,7 +61,7 @@ const Portfolio = () => {
         <div className="relative">
           <img 
             className="profile-image" 
-            src="./profile.jpg" 
+            src="../profile.jpg" 
             alt="Rounak Paul" 
           />
           <motion.div 
