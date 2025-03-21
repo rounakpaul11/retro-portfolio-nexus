@@ -61,7 +61,7 @@ const Portfolio = () => {
         <div className="relative">
           <img 
             className="profile-image" 
-            src="https://images.unsplash.com/photo-1599566150163-29194dcaad36" 
+            src="./profile.jpg" 
             alt="Rounak Paul" 
           />
           <motion.div 
