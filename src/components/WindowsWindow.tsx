@@ -1,6 +1,6 @@
 
 import { ReactNode, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { X, Minus, Square } from "lucide-react";
 
 interface WindowsWindowProps {
@@ -37,9 +37,8 @@ const WindowsWindow = ({
     setIsMaximized(!isMaximized);
   };
 
-  const windowVariants = {
+  const windowVariants: Variants = {
     maximized: {
-      position: "fixed",
       top: 0,
       left: 0,
       right: 0,
@@ -48,14 +47,17 @@ const WindowsWindow = ({
       width: "100%",
       height: "100%",
       borderRadius: 0,
-      zIndex: 40
+      zIndex: 40,
+      x: 0,
+      y: 0
     },
     normal: {
-      position: "relative",
       width: "auto",
       height: "auto",
       borderRadius: "var(--radius)",
-      zIndex: 30
+      zIndex: 30,
+      x: position.x,
+      y: position.y
     },
     minimized: {
       scale: 0.1,
@@ -84,6 +86,9 @@ const WindowsWindow = ({
       onDragStart={() => setIsDragging(true)}
       onDragEnd={() => setIsDragging(false)}
       whileDrag={{ cursor: "grabbing" }}
+      style={{
+        position: isMaximized ? "fixed" : "relative"
+      }}
     >
       <div 
         className="window-header cursor-grab active:cursor-grabbing"
