@@ -1,129 +1,15 @@
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Phone, Award, Code } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Portfolio = () => {
   const [visitCount, setVisitCount] = useState(8450);
   const [midiPlaying, setMidiPlaying] = useState(false);
-
-  const introRef = useRef(null);
-  const profileRef = useRef(null);
-  const skillsRef = useRef(null);
-  const experienceRef = useRef(null);
-  const contactRef = useRef(null);
-  const awardsRef = useRef(null);
-  const guestbookRef = useRef(null);
   
   const playAudio = () => {
     setMidiPlaying(!midiPlaying);
   };
-  
-  useEffect(() => {
-    // Stagger animation for the intro section
-    gsap.from(".midi-control button, .marquee, .profile-image", {
-      y: 30,
-      opacity: 0,
-      stagger: 0.2,
-      duration: 0.7,
-      ease: "power2.out",
-      delay: 0.3
-    });
-    
-    // Gradient heading animation
-    gsap.from(".gradient-heading", {
-      opacity: 0,
-      scale: 0.8,
-      duration: 1,
-      ease: "elastic.out(1, 0.5)"
-    });
-    
-    // Profile image pulse animation
-    gsap.to(".profile-image", {
-      boxShadow: "0 0 20px rgba(100, 200, 255, 0.7)",
-      duration: 1.5,
-      repeat: -1,
-      yoyo: true
-    });
-    
-    // Set up scroll animations
-    ScrollTrigger.batch(".skill-bar", {
-      onEnter: batch => {
-        gsap.to(batch, {
-          opacity: 1,
-          y: 0,
-          stagger: 0.1,
-          duration: 0.5
-        });
-        
-        batch.forEach(bar => {
-          const level = bar.querySelector(".skill-level");
-          if (level) {
-            const width = level.getAttribute("data-width") || "0%";
-            gsap.fromTo(level, 
-              { width: "0%" }, 
-              { width, duration: 1.5, ease: "power2.out" }
-            );
-          }
-        });
-      },
-      start: "top 80%"
-    });
-    
-    // Job animation
-    gsap.from(".job", {
-      scrollTrigger: {
-        trigger: ".job",
-        start: "top 80%"
-      },
-      opacity: 0,
-      y: 50,
-      duration: 0.8,
-      ease: "back.out(1.2)"
-    });
-    
-    // Contact links animation
-    gsap.from(".contact-item", {
-      scrollTrigger: {
-        trigger: ".contact-item",
-        start: "top 85%"
-      },
-      opacity: 0,
-      x: -30,
-      stagger: 0.15,
-      duration: 0.7
-    });
-    
-    // Awards animation
-    gsap.from(".award-item", {
-      scrollTrigger: {
-        trigger: ".awards",
-        start: "top 85%"
-      },
-      scale: 0,
-      opacity: 0, 
-      stagger: 0.1,
-      duration: 0.5,
-      ease: "back.out(2)"
-    });
-    
-    // Hit counter animation
-    gsap.from(".counter-box", {
-      scrollTrigger: {
-        trigger: ".hit-counter",
-        start: "top 90%"
-      },
-      y: 20,
-      opacity: 0,
-      stagger: 0.1,
-      duration: 0.5
-    });
-    
-  }, []);
 
   return (
     <div className="space-y-6">
@@ -147,8 +33,8 @@ const Portfolio = () => {
         <span>Welcome to my portfolio website! Thanks for visiting! Check out my experience and skills below! Last updated: 02/15/2003</span>
       </div>
 
-      <div className="flex justify-center items-center gap-4 py-2" ref={introRef}>
-        <div className="h-6 w-6 animate-glow">
+      <div className="flex justify-center items-center gap-4 py-2">
+        <div className="h-6 w-6">
           <Code className="h-6 w-6 text-accent" />
         </div>
         <motion.span 
@@ -159,7 +45,7 @@ const Portfolio = () => {
         >
           Welcome to my personal portfolio website!
         </motion.span>
-        <div className="h-6 w-6 animate-glow">
+        <div className="h-6 w-6">
           <Code className="h-6 w-6 text-accent" />
         </div>
       </div>
@@ -168,7 +54,6 @@ const Portfolio = () => {
 
       <motion.div 
         className="profile"
-        ref={profileRef}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -195,16 +80,16 @@ const Portfolio = () => {
           </p>
           
           <div className="flex flex-wrap gap-3 mt-3">
-            <a href="mailto:paulrounak999@gmail.com" className="flex items-center gap-1.5 text-sm text-accent hover:underline contact-item">
+            <a href="mailto:paulrounak999@gmail.com" className="flex items-center gap-1.5 text-sm text-accent hover:underline">
               <Mail className="h-4 w-4" /> paulrounak999@gmail.com
             </a>
-            <a href="https://www.linkedin.com/in/rounakk11/" className="flex items-center gap-1.5 text-sm text-accent hover:underline contact-item">
+            <a href="https://www.linkedin.com/in/rounakk11/" className="flex items-center gap-1.5 text-sm text-accent hover:underline">
               <Linkedin className="h-4 w-4" /> rounakk11
             </a>
-            <a href="tel:918822955038" className="flex items-center gap-1.5 text-sm text-accent hover:underline contact-item">
+            <a href="tel:918822955038" className="flex items-center gap-1.5 text-sm text-accent hover:underline">
               <Phone className="h-4 w-4" /> (91) 8822955038
             </a>
-            <a href="https://github.com/paulrounak" className="flex items-center gap-1.5 text-sm text-accent hover:underline contact-item">
+            <a href="https://github.com/paulrounak" className="flex items-center gap-1.5 text-sm text-accent hover:underline">
               <Github className="h-4 w-4" /> paulrounak
             </a>
           </div>
@@ -215,7 +100,6 @@ const Portfolio = () => {
 
       <motion.div 
         className="space-y-4"
-        ref={skillsRef}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -238,7 +122,7 @@ const Portfolio = () => {
           ].map((skill, index) => (
             <motion.div 
               key={skill.name}
-              className="bg-muted/20 p-3 rounded border border-white/5 skill-bar"
+              className="bg-muted/20 p-3 rounded border border-white/5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 * index }}
@@ -249,11 +133,9 @@ const Portfolio = () => {
                 <span className="text-xs text-white/70">{skill.level}%</span>
               </div>
               <div className="skill-bar">
-                <motion.div 
+                <div
                   className="skill-level"
-                  data-width={`${skill.level}%`}
-                  style={{ width: 0, height: '100%', background: 'linear-gradient(to right, #58c7f3, #8be9fd)' }}
-                  transition={{ duration: 1, delay: 0.2 * index }}
+                  style={{ width: `${skill.level}%` }}
                 />
               </div>
             </motion.div>
@@ -265,7 +147,6 @@ const Portfolio = () => {
 
       <motion.div 
         className="space-y-4"
-        ref={experienceRef}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.4 }}
@@ -278,7 +159,7 @@ const Portfolio = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           whileHover={{ 
-            boxShadow: "0 0 20px rgba(0, 100, 255, 0.15)", 
+            boxShadow: "0 0 20px rgba(255, 230, 170, 0.15)", 
             backgroundColor: "rgba(255, 255, 255, 0.05)" 
           }}
         >
@@ -303,7 +184,6 @@ const Portfolio = () => {
 
       <motion.div 
         className="space-y-4"
-        ref={contactRef}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.6 }}
@@ -312,9 +192,12 @@ const Portfolio = () => {
         <p className="text-white/80">Feel free to contact me for any web development needs or questions!</p>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <a 
+          <motion.a 
             href="mailto:paulrounak999@gmail.com"
-            className="p-3 rounded bg-muted/30 hover:bg-muted/50 transition-all duration-300 flex items-center gap-3 group contact-item"
+            className="p-3 rounded bg-muted/30 hover:bg-muted/50 transition-all duration-300 flex items-center gap-3 group"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 }}
           >
             <div className="h-10 w-10 rounded-full bg-accent/20 flex items-center justify-center group-hover:bg-accent/30 transition-colors">
               <Mail className="h-5 w-5 text-accent" />
@@ -323,11 +206,14 @@ const Portfolio = () => {
               <span className="text-xs text-white/60">Email</span>
               <span className="text-sm">paulrounak999@gmail.com</span>
             </div>
-          </a>
+          </motion.a>
           
-          <a 
+          <motion.a 
             href="https://www.linkedin.com/in/rounakk11/"
-            className="p-3 rounded bg-muted/30 hover:bg-muted/50 transition-all duration-300 flex items-center gap-3 group contact-item"
+            className="p-3 rounded bg-muted/30 hover:bg-muted/50 transition-all duration-300 flex items-center gap-3 group"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
           >
             <div className="h-10 w-10 rounded-full bg-accent/20 flex items-center justify-center group-hover:bg-accent/30 transition-colors">
               <Linkedin className="h-5 w-5 text-accent" />
@@ -336,11 +222,14 @@ const Portfolio = () => {
               <span className="text-xs text-white/60">LinkedIn</span>
               <span className="text-sm">rounakpaul11</span>
             </div>
-          </a>
+          </motion.a>
           
-          <a 
+          <motion.a 
             href="tel:918822955038"
-            className="p-3 rounded bg-muted/30 hover:bg-muted/50 transition-all duration-300 flex items-center gap-3 group contact-item"
+            className="p-3 rounded bg-muted/30 hover:bg-muted/50 transition-all duration-300 flex items-center gap-3 group"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
           >
             <div className="h-10 w-10 rounded-full bg-accent/20 flex items-center justify-center group-hover:bg-accent/30 transition-colors">
               <Phone className="h-5 w-5 text-accent" />
@@ -349,11 +238,14 @@ const Portfolio = () => {
               <span className="text-xs text-white/60">Phone</span>
               <span className="text-sm">(91) 8822955038</span>
             </div>
-          </a>
+          </motion.a>
           
-          <a 
+          <motion.a 
             href="https://github.com/paulrounak"
-            className="p-3 rounded bg-muted/30 hover:bg-muted/50 transition-all duration-300 flex items-center gap-3 group contact-item"
+            className="p-3 rounded bg-muted/30 hover:bg-muted/50 transition-all duration-300 flex items-center gap-3 group"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
           >
             <div className="h-10 w-10 rounded-full bg-accent/20 flex items-center justify-center group-hover:bg-accent/30 transition-colors">
               <Github className="h-5 w-5 text-accent" />
@@ -362,13 +254,13 @@ const Portfolio = () => {
               <span className="text-xs text-white/60">GitHub</span>
               <span className="text-sm">paulrounak</span>
             </div>
-          </a>
+          </motion.a>
         </div>
       </motion.div>
 
       <div className="h-px bg-white/10 my-6" />
 
-      <div className="awards" ref={awardsRef}>
+      <div className="awards">
         {["Cool Site of the Day", "HTML 5 Compliant", "Hot Pick 2023", "Best of the Web"].map((award, index) => (
           <motion.div 
             key={award}
@@ -392,7 +284,6 @@ const Portfolio = () => {
 
       <motion.div 
         className="guestbook"
-        ref={guestbookRef}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.8 }}
@@ -409,7 +300,7 @@ const Portfolio = () => {
             className="guestbook-entry"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.9 + (index * 0.1) }}
+            transition={{ duration: 0.4, delay: 0.1 + (index * 0.1) }}
           >
             <p className="text-sm">
               <span className="font-medium text-accent">{entry.name}</span> ({entry.email}) wrote on {entry.date}:

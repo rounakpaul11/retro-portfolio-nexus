@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -23,7 +22,7 @@
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
     
-    --accent: 224 76% 48%;
+    --accent: 30 100% 70%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 62.8% 30.6%;
@@ -75,10 +74,9 @@
   }
   
   .text-gradient-accent {
-    @apply bg-gradient-to-br from-accent via-accent/80 to-accent/60 bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-[#FEC6A1] via-[#FEF7CD] to-[#FFDEE2] bg-clip-text text-transparent;
   }
 
-  /* Retro Windows Animations */
   @keyframes bootup {
     0% { transform: scale(0.8); opacity: 0; }
     50% { transform: scale(1.05); opacity: 0.5; }
@@ -121,13 +119,12 @@
     animation: marquee 15s linear infinite;
   }
 
-  /* Window UI Elements */
   .window {
     @apply bg-card border border-white/10 rounded-md overflow-hidden transition-all duration-300 shadow-lg;
   }
 
   .window-header {
-    @apply bg-gradient-to-r from-secondary to-accent py-2 px-3 flex justify-between items-center;
+    @apply bg-gradient-to-r from-secondary to-[#FEC6A1] py-2 px-3 flex justify-between items-center;
   }
 
   .window-title {
@@ -158,13 +155,12 @@
     @apply p-4 bg-card;
   }
 
-  /* Navigation Elements */
   .nav-bar {
     @apply bg-muted/50 p-1.5 flex space-x-1 overflow-x-auto scrollbar-none;
   }
 
   .nav-button {
-    @apply px-3 py-1 text-xs bg-secondary/80 rounded hover:bg-accent/20 transition-colors whitespace-nowrap;
+    @apply px-3 py-1 text-xs bg-secondary/80 rounded hover:bg-[#FEC6A1]/30 transition-colors whitespace-nowrap;
   }
 
   .address-bar {
@@ -172,21 +168,19 @@
   }
   
   .address-text {
-    @apply text-accent ml-1 hover:underline;
+    @apply text-[#FEF7CD] ml-1 hover:underline;
   }
 
-  /* Status Bar */
   .status-bar {
     @apply bg-muted/50 text-xs py-1 px-3 flex justify-between items-center border-t border-white/5;
   }
 
-  /* Content Elements */
   .profile {
     @apply flex flex-col md:flex-row gap-4 my-6;
   }
 
   .profile-image {
-    @apply rounded-full border-2 border-accent/50 shadow-lg shadow-accent/20 w-32 h-32 object-cover;
+    @apply rounded-full border-2 border-[#FEC6A1]/50 shadow-lg shadow-[#FEC6A1]/20 w-32 h-32 object-cover;
   }
 
   .skill-bar {
@@ -194,7 +188,7 @@
   }
 
   .skill-level {
-    @apply h-full bg-gradient-to-r from-accent/80 to-accent;
+    @apply h-full bg-gradient-to-r from-[#FEC6A1]/80 to-[#FEF7CD];
   }
 
   .job {
@@ -217,9 +211,8 @@
     @apply text-sm italic text-muted-foreground mb-2;
   }
 
-  /* Retro Elements */
   .guestbook {
-    @apply bg-muted/20 border border-accent/30 rounded-md p-4 my-4;
+    @apply bg-muted/20 border border-[#FEC6A1]/30 rounded-md p-4 my-4;
   }
 
   .guestbook-entry {
@@ -262,7 +255,6 @@
     @apply h-full bg-gradient-to-r from-secondary/80 to-secondary animate-loading-bar;
   }
 
-  /* Custom Elements */
   .awards {
     @apply flex flex-wrap justify-center gap-2 my-4 p-3 border border-white/10 rounded-md bg-muted/10;
   }
@@ -272,7 +264,7 @@
   }
 
   .gradient-heading {
-    @apply bg-gradient-to-r from-accent via-accent/70 to-accent/50 bg-clip-text text-transparent font-bold text-center py-2 text-2xl;
+    @apply bg-gradient-to-r from-[#FEC6A1] via-[#FEF7CD] to-[#FFDEE2] bg-clip-text text-transparent font-bold text-center py-2 text-2xl;
   }
 
   .theme-toggle {
