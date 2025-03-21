@@ -2,6 +2,7 @@
 import { ReactNode, useState, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
 import { X, Minus, Square } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface WindowsWindowProps {
   title: string;
@@ -24,6 +25,14 @@ const WindowsWindow = ({
   const [isMaximized, setIsMaximized] = useState(false);
   const [position, setPosition] = useState(defaultPosition);
   const [isDragging, setIsDragging] = useState(false);
+  const isMobile = useIsMobile();
+
+  // Auto-maximize on mobile devices
+  useEffect(() => {
+    if (isMobile) {
+      setIsMaximized(true);
+    }
+  }, [isMobile]);
 
   const handleClose = () => {
     if (onClose) onClose();
@@ -80,66 +89,87 @@ const WindowsWindow = ({
             : "normal"
       }
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      drag={!isMaximized && !isMinimized}
+      drag={!isMaximized && !isMinimized && !isMobile}
       dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
       dragElastic={0.1}
       onDragStart={() => setIsDragging(true)}
       onDragEnd={() => setIsDragging(false)}
       whileDrag={{ cursor: "grabbing" }}
       style={{
-        position: isMaximized ? "fixed" : "relative"
+        position: isMaximized ? "fixed" : "relative",
+        maxWidth: isMobile ? "100%" : "calc(100vw - 2rem)",
+        maxHeight: isMobile ? "100%" : "calc(100vh - 2rem)",
+        overflow: "hidden"
       }}
     >
       <div 
-        className="window-header cursor-grab active:cursor-grabbing"
+        className="window-header cursor-grab active:cursor-grabbing flex items-center justify-between px-3 py-2"
         onDoubleClick={handleMaximize}
       >
-        <div className="window-title">
-          {icon && <span className="mr-2">{icon}</span>}
-          <span className="truncate">{title}</span>
+        <div className="window-title flex items-center overflow-hidden">
+          {icon && <span className="mr-2 flex-shrink-0">{icon}</span>}
+          <span className="truncate text-sm md:text-base">{title}</span>
         </div>
         <div className="flex items-center space-x-1.5">
-          <button onClick={handleMinimize} className="window-button window-button-minimize">
+          <button 
+            onClick={handleMinimize} 
+            className="window-button window-button-minimize w-4 h-4 md:w-5 md:h-5 flex items-center justify-center"
+            aria-label="Minimize"
+          >
             <Minus className="h-2 w-2 opacity-0" />
           </button>
-          <button onClick={handleMaximize} className="window-button window-button-maximize">
+          <button 
+            onClick={handleMaximize} 
+            className="window-button window-button-maximize w-4 h-4 md:w-5 md:h-5 flex items-center justify-center"
+            aria-label="Maximize"
+          >
             <Square className="h-2 w-2 opacity-0" />
           </button>
-          <button onClick={handleClose} className="window-button window-button-close">
+          <button 
+            onClick={handleClose} 
+            className="window-button window-button-close w-4 h-4 md:w-5 md:h-5 flex items-center justify-center"
+            aria-label="Close"
+          >
             <X className="h-2 w-2 opacity-0" />
           </button>
         </div>
       </div>
 
-      <div className="nav-bar">
-        <button className="nav-button">File</button>
-        <button className="nav-button">Edit</button>
-        <button className="nav-button">View</button>
-        <button className="nav-button">Favorites</button>
-        <button className="nav-button">Tools</button>
-        <button className="nav-button">Help</button>
+      <div className="nav-bar flex overflow-x-auto scrollbar-none">
+        {["File", "Edit", "View", "Favorites", "Tools", "Help"].map((item) => (
+          <button key={item} className="nav-button whitespace-nowrap text-xs">
+            {item}
+          </button>
+        ))}
       </div>
 
-      <div className="nav-bar">
-        <button className="nav-button">Back</button>
-        <button className="nav-button">Forward</button>
-        <button className="nav-button">Refresh</button>
-        <button className="nav-button">Home</button>
+      <div className="nav-bar flex overflow-x-auto scrollbar-none">
+        {["Back", "Forward", "Refresh", "Home"].map((item) => (
+          <button key={item} className="nav-button whitespace-nowrap text-xs">
+            {item}
+          </button>
+        ))}
       </div>
 
-      <div className="address-bar">
-        Address: <span className="address-text">http://www.rounak-paul.com/index.html</span>
+      <div className="address-bar px-2 py-1 text-xs flex items-center overflow-hidden">
+        Address: <span className="address-text truncate ml-1">http://www.rounak-paul.com/index.html</span>
       </div>
 
       <div className="window-content scrollbar-none overflow-y-auto" style={{ 
-        maxHeight: isMaximized ? 'calc(100vh - 120px)' : '70vh' 
+        maxHeight: isMaximized 
+          ? isMobile 
+            ? 'calc(100vh - 130px)' 
+            : 'calc(100vh - 120px)' 
+          : isMobile 
+            ? '60vh' 
+            : '70vh' 
       }}>
         {children}
       </div>
 
-      <div className="status-bar">
+      <div className="status-bar text-xs px-2 py-1 flex justify-between items-center">
         <div>Done</div>
-        <div>Internet | Protected Mode: Off</div>
+        <div className="hidden sm:block">Internet | Protected Mode: Off</div>
       </div>
     </motion.div>
   );
