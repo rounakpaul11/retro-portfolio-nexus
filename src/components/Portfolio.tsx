@@ -61,7 +61,7 @@ const Portfolio = () => {
         <div className="relative">
           <img 
             className="profile-image" 
-            src="../profile.jpg" 
+            src="profile.jpg" 
             alt="Rounak Paul" 
           />
           <motion.div 
@@ -89,7 +89,7 @@ const Portfolio = () => {
             <a href="tel:918822955038" className="flex items-center gap-1.5 text-sm text-accent hover:underline">
               <Phone className="h-4 w-4" /> (91) 8822955038
             </a>
-            <a href="https://github.com/paulrounak" className="flex items-center gap-1.5 text-sm text-accent hover:underline">
+            <a href="https://github.com/rounakpaul11" className="flex items-center gap-1.5 text-sm text-accent hover:underline">
               <Github className="h-4 w-4" /> paulrounak
             </a>
           </div>
