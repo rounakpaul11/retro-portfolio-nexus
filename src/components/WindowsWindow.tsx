@@ -104,7 +104,6 @@ const WindowsWindow = ({
     >
       <div 
         className="window-header cursor-grab active:cursor-grabbing flex items-center justify-between px-3 py-2"
-        onDoubleClick={handleMaximize}
       >
         <div className="window-title flex items-center overflow-hidden">
           {icon && <span className="mr-2 flex-shrink-0">{icon}</span>}

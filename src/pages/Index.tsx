@@ -9,7 +9,7 @@ import { Monitor } from "lucide-react";
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [desktopItems, setDesktopItems] = useState([
-    { id: "portfolio", label: "My Portfolio", icon: <Monitor className="h-6 w-6" />, isOpen: false }
+    { id: "portfolio", label: "My Portfolio", icon: <Monitor className="h-6 w-6" />, isOpen: true }
   ]);
 
   const handleLoadComplete = () => {
@@ -40,7 +40,7 @@ const Index = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3 }}
                 whileTap={{ scale: 0.95 }}
-                onDoubleClick={() => toggleWindow(item.id)}
+                onClick={() => toggleWindow(item.id)}
               >
                 <div className="w-12 h-12 flex items-center justify-center bg-accent/10 rounded group-hover:bg-accent/20 transition-colors border border-white/10 mb-1">
                   {item.icon}
@@ -72,18 +72,6 @@ const Index = () => {
               </motion.div>
             )}
           </AnimatePresence>
-
-          {/* If no windows are open, show a helper message */}
-          {!desktopItems.some(item => item.isOpen) && (
-            <motion.div 
-              className="absolute bottom-8 right-8 bg-black/40 backdrop-blur-md border border-white/10 p-3 rounded-lg max-w-xs"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1 }}
-            >
-              <p className="text-sm text-white/80">Double-click on "My Portfolio" to view Rounak's portfolio</p>
-            </motion.div>
-          )}
         </div>
       )}
     </div>
